@@ -1,4 +1,5 @@
-sudo gem install rspec
+sudo gem install rspec cucumber --no-rdoc --no-ri
+sudo gem install rails --version=2.2.2 --no-rdoc --no-ri
 
 echo WC_DB_ENGINE=${WC_DB_ENGINE}
  
@@ -28,5 +29,11 @@ production:
 " > config/database.yml
 fi
  
-rake db:bootstrap RAILS_ENV=production
+rake production db:bootstrap << EOF
+y
+admin
+admin
+${WC_DB_PASSWORD}
+4
+EOF
 chown www-data log
